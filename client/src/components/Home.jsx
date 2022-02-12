@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs, getTemperament, selectFiltered, filterCreated, orderByName } from "../actions";
+import { getDogs, getTemperament, selectFiltered, filterCreated, orderByName, orderByWeight } from "../actions";
 import { Link } from 'react-router-dom';
 import Card from "./Card";
 import SearchBar from "./SearchBar";
@@ -33,6 +33,10 @@ export default function Home () {
 
     function handleFilterCreated(e) {
         dispatch(filterCreated(e.target.value))
+    }
+    
+    function handleWeight(e) {
+        dispatch(orderByWeight(e.target.value))
     }
 
     const paginated = (pageNumbers) => {
@@ -66,10 +70,15 @@ export default function Home () {
                 <option value="Api">Existente</option>
             </select>
 
+            <select onChange={e => handleWeight(e)}>
+                <option value='asc'>Ascen</option>
+                <option value='desc'>Desc</option>
+            </select>
+
             <select onChange={e => handleSelectFiltered(e)}>
             {temperament.map((temp) => (
                         <option value={temp.name}>{temp.name}</option>
-    ))}
+            ))}
             </select>
 
             <Paginated

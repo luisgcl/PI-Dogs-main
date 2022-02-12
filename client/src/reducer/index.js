@@ -27,11 +27,10 @@ function rootReducer (state = inicialState, action) {
                 }
 
                 case 'SELECT_FILTERED':
-                    const selectFiltered = action.payload === state.temperament && state.temperament.filter(el => el.temperament)
-
+                    const selectFiltered = action.payload === state.temperament.name ? state.temperament.filter(el => el.temperament.name) : state.temperament
                     return {
                         ...state,
-                        temperament : selectFiltered
+                        temperament: selectFiltered
                     }
 
                 case 'POST_DOG':
@@ -58,6 +57,21 @@ function rootReducer (state = inicialState, action) {
                               ...state,
                               dogs: sortedArr
                           }
+                        case 'ORDER_BY_WEIGHT':
+                            let sortedWeight = action.payload === 'asc' ? state.dogs.sort((a,b) => { 
+                              if(a.weight.metric > b.weight.metric || b.weight) return 1
+                              if(b.weight.metric > a.weight.metric || a.weight) return -1
+                              return 0
+                          }) :
+                          state.dogs.sort((a, b) => {
+                              if(a.weight.metric > b.weight.metric || b.weight) return -1
+                              if(b.weight.metric > a.weight.metric || a.weight) return 1
+                              return 0
+                          })
+                            return{
+                                ...state,
+                                dogs: sortedWeight
+                            }
                           
             default:
                 return state;
