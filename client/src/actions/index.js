@@ -25,8 +25,42 @@ export function getNameDogs(name) {
 }
 
 export function filterCreated(payload) {
+  
     return {
         type: 'FILTER_CREATED',
         payload
+    }
+}
+
+export function selectFiltered(payload) {
+    console.log(payload)
+    return {
+        type: 'SELECT_FILTERED',
+        payload
+    }
+}
+
+export function orderByName(payload) {
+    return {
+        type: 'ORDER_BY_NAME',
+        payload
+    }
+}
+
+export function postDog(payload) {
+    return async function(dispatch) {
+        const response = await axios.post("http://localhost:3001/dog", payload);
+        console.log(response)
+        return response;
+    }
+}
+
+export function getTemperament() {
+    return async function(dispatch) {
+        var info = await axios.get("http://localhost:3001/temperament");
+        return dispatch({
+            type: 'GET_TEMPERAMENT',
+            payload: info.data  
+        })
     }
 }

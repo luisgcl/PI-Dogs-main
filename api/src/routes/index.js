@@ -106,7 +106,8 @@ router.post('/dog', async (req, res) => {
         weight,
         timeLife,
         createdInDb,
-        temperaments
+        image,
+        temperament,
     } = req.body
 
     let dogCreated = await Dog.create({
@@ -114,11 +115,11 @@ router.post('/dog', async (req, res) => {
         height,
         weight,
         timeLife,
-        temperaments,
+        image,
         createdInDb
     })
     let temperamentDb = await Temperament.findAll({
-        where: { name }
+        where: { name : temperament }
     })
     dogCreated.addTemperament(temperamentDb)
     res.send("Perro creado con exito!")
