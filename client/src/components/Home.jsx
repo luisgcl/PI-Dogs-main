@@ -7,11 +7,15 @@ import Card from "./Card";
 import SearchBar from "./SearchBar";
 import Paginated from "./Paginated";
 
+//styles
+import styles from './Home.module.css'
+
 export default function Home () {
     const dispatch = useDispatch();
     const allDogs = useSelector((state) => state.dogs)
     const temperament = useSelector((state => state.temperament))
     const [currentPage, setCurrentPage] = useState(1)
+    const [orden, setOrden] = useState('')
     const [dogPerPage] = useState(8)
     const indexForLastDog = currentPage * dogPerPage
     const indexFortFirstDog = indexForLastDog - dogPerPage
@@ -37,49 +41,74 @@ export default function Home () {
     
     function handleWeight(e) {
         dispatch(orderByWeight(e.target.value))
+        setCurrentPage(1)
+        setOrden(`Ordenado ${e.target.value}`)
     }
 
     const paginated = (pageNumbers) => {
         setCurrentPage(pageNumbers)
     }
 
-    function handleButton(e) {
+    function handleSort(e) {
         dispatch(orderByName(e.target.value))
+        setCurrentPage(1)
+        setOrden(`Ordenado ${e.target.value}`)
     }
 
     return (
-        <div>
+        <div className={styles.container}>
+            <nav>
+            <Link to='/dog' className={styles.link}>Crear raza</Link>
 
-            <Link to='/dog'>Crear perro</Link>
 
-            <h1>crea tu perro</h1>
+<button className={styles.button} onClick={e => {handleClick(e)}}>
+    cargar perros
+</button>
 
-            <button onClick={e => {handleClick(e)}}>
-                volver a cargar todos los perros
-            </button>
 
+
+        <div className={styles.contentSelect}>
+    <select onChange={e => handleSort(e)}>
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+    </select>
+        </div>
+
+    
+<div className={styles.contentSelect}>
+<select onChange={e => handleFilterCreated(e)}>
+    <option value="All">Todos</option>
+    <option value="created">Creados</option>
+    <option value="Api">Existente</option>
+</select>
+</div>
+
+
+<div className={styles.contentSelect}>
+<select onChange={e => handleWeight(e)}>
+    <option value='asc'>Ascen</option>
+    <option value='desc'>Desc</option>
+</select>
+</div>
+
+<div className={styles.contentSelect}>
+<select onChange={e => handleSelectFiltered(e)}>
+{temperament.map((temp) => (
+            <option value={temp.name}>{temp.name}</option>
+))}
+</select>
+</div>
+
+
+<SearchBar />
+            </nav>
+            <hr className={styles.hr} />
+            
             <div>
+            <h1>Listado de perros</h1>
 
-            <SearchBar />
 
-            <button onClick={e => handleButton(e)}>A - Z y Z -A</button>
-
-           <select onChange={e => handleFilterCreated(e)}>
-                <option value="All">Todos</option>
-                <option value="created">Creados</option>
-                <option value="Api">Existente</option>
-            </select>
-
-            <select onChange={e => handleWeight(e)}>
-                <option value='asc'>Ascen</option>
-                <option value='desc'>Desc</option>
-            </select>
-
-            <select onChange={e => handleSelectFiltered(e)}>
-            {temperament.map((temp) => (
-                        <option value={temp.name}>{temp.name}</option>
-            ))}
-            </select>
+            
 
             <Paginated
                 dogPerPage={dogPerPage}

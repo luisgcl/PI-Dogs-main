@@ -24,6 +24,20 @@ export function getNameDogs(name) {
     }
 }
 
+export function getIdDogs(id) {
+    return async function (dispatch) {
+        try {
+            var json = await axios.get('http://localhost:3001/dogs/:' + id);
+            return dispatch({
+                type: 'GET_ID_DOGS',
+                payload: json.data
+            })
+        }catch(error) {
+            console.log(error)
+        }
+    }
+}
+
 export function filterCreated(payload) {
   
     return {

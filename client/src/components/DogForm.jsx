@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {postDog, getTemperament} from '../actions/index'
 import { useDispatch, useSelector } from 'react-redux';
+import styles from './DogForm.module.css'
 
 export default function DogForm() {
     const dispatch = useDispatch();
@@ -59,10 +60,10 @@ export default function DogForm() {
     },[dispatch])
 
     return (
-        <div>
+        <div className={styles.container}>
             <Link to= '/home'><button>Volver</button></Link>
             <h1>Crea tu raza</h1>
-            <form onSubmit={e => handleSubmit(e)}>
+            <form className={styles.form} onSubmit={e => handleSubmit(e)}>
                 <div>
                     <label htmlFor="">Nombre:</label>
                     <input 
