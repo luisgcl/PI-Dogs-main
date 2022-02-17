@@ -27,11 +27,34 @@ function rootReducer (state = inicialState, action) {
                 }
 
                 case 'SELECT_FILTERED':
-                    const selectFiltered = action.payload === state.temperament.name ? state.temperament.filter(el => el.temperament.name) : state.temperament
-                    return {
-                        ...state,
-                        temperament: selectFiltered
-                    }
+                    // const filterDogs = state.allDogs
+                    // const selectFiltered = action.payload === state.temperament.name ? state.temperament.filter(el => el.temperament.name) : state.temperament
+                    // return {
+                    //     ...state,
+                    //     temperament: selectFiltered
+                    // }
+
+                //creado por axel
+                    const allDogs = state.allDogs; // Al usar state.allDogs en lugar de state.dogs, cada vez que aplique un filtro, state.dogs va a cambiar, pero voy a seguir teniendo guardados todos los perros en mi state.allDogs, entonces voy a poder cambiar de filtro sin tener que volver a cargar la página.
+            const temperamentFiltered = action.payload === 'all' ? allDogs : allDogs.filter(el => {
+                if (typeof (el.temperament) === 'string') return el.temperament.includes(action.payload);
+                if (Array.isArray(el.temperament)) {
+                    let temps = el.temperament.map(el => el.name);
+                    return temps.includes(action.payload);
+                }
+                return true;
+            });
+            return {
+                ...state,
+                dogs: temperamentFiltered
+            }
+
+        //     const allDogs = state.allDogs
+        //     const temperamentFiltered = action.payload === 'All' ? allDogs : allDogs.filter(e => e.temperament === action.payload)    
+        // return{
+        //     ...state,
+        //     dogs: temperamentFiltered
+        //     }
 
                 case 'POST_DOG':
                     return {
@@ -57,16 +80,14 @@ function rootReducer (state = inicialState, action) {
                               ...state,
                               dogs: sortedArr
                           }
-                        case 'ORDER_BY_WEIGHT':
-                            let sortedWeight = action.payload === 'asc' ? state.dogs.sort((a,b) => { 
-                              if(a.weight.metric > b.weight.metric || b.weight) return 1
-                              if(b.weight.metric > a.weight.metric || a.weight) return -1
-                              return 0
+                        case 'ORDER_BY_WEIGHT':   
+                        let sortedWeight = action.payload === 'asc' ? state.dogs.sort((a,b) => { 
+                              
+                              return (parseInt(b.weightMin) - parseInt(a.weightMin) ) 
+                             
                           }) :
                           state.dogs.sort((a, b) => {
-                              if(a.weight.metric > b.weight.metric || b.weight) return -1
-                              if(b.weight.metric > a.weight.metric || a.weight) return 1
-                              return 0
+                            return (parseInt(b.weightMax) - parseInt(a.weightMax) )
                           })
                             return{
                                 ...state,

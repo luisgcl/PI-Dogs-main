@@ -9,11 +9,14 @@ export default function DogForm() {
     const temperament = useSelector(state => state.temperament);
 
     const [input, setInput] = useState({
-        name: "",
-        height: "",
-        weight: "",
-        timeLife: "",
-        imge: "",
+            name: "",
+            heightMin: "",
+            heightMax: "",
+            weightMin: "",
+            weightMax: "",
+            timeLifeMin: "",
+            timeLifeMax: "",
+            image: "",
         temperament: []
 
     })
@@ -40,9 +43,12 @@ export default function DogForm() {
         alert("Personaje creado con exito!!")
         setInput({
             name: "",
-            height: "",
-            weight: "",
-            timeLife: "",
+            heightMin: "",
+            heightMax: "",
+            weightMin: "",
+            weightMax: "",
+            timeLifeMin: "",
+            timeLifeMax: "",
             image: "",
             temperament: []
         })
@@ -65,7 +71,7 @@ export default function DogForm() {
             <h1>Crea tu raza</h1>
             <form className={styles.form} onSubmit={e => handleSubmit(e)}>
                 <div>
-                    <label htmlFor="">Nombre:</label>
+                    <label htmlFor="">Nombre: </label>
                     <input 
                     type="text"
                     value={input.name}
@@ -74,11 +80,21 @@ export default function DogForm() {
                     />
         </div>
                 <div>
-                <label htmlFor="">Altura min/max:</label>
+                <label htmlFor="">Altura min: </label>
                     <input 
                     type="text"
-                    value={input.height.metric}
-                    name='height'
+                    value={input.heightMin}
+                    name='heightMin'
+                    onChange={e => handleChange(e)}
+                    />
+                </div>
+
+                <div>
+                <label htmlFor="">Altura max: </label>
+                    <input 
+                    type="text"
+                    value={input.heightMax}
+                    name='heightMax'
                     onChange={e => handleChange(e)}
                     />
                 </div>
@@ -86,11 +102,21 @@ export default function DogForm() {
               
 
                 <div>
-                <label htmlFor="">Peso min/max:</label>
+                <label htmlFor="">Peso min: </label>
                     <input 
                     type="text"
-                    value={input.weight.metric}
-                    name='weight'
+                    value={input.weightMin}
+                    name='weightMin'
+                    onChange={e => handleChange(e)}
+                    />
+                </div>
+
+                <div>
+                <label htmlFor="">Peso max: </label>
+                    <input 
+                    type="text"
+                    value={input.weightMax}
+                    name='weightMax'
                     onChange={e => handleChange(e)}
                     />
                 </div>
@@ -98,17 +124,28 @@ export default function DogForm() {
                
 
                 <div>
-                <label htmlFor="">Tiempo de vida:</label>
+                <label htmlFor="">Tiempo de vida min: </label>
                     <input 
                     type="text"
-                    value={input.timeLife}
-                    name='timeLife'
+                    value={input.timeLifeMin}
+                    name='timeLifeMin'
                     onChange={e => handleChange(e)}
                     />
                 </div>
 
                 <div>
-                <label htmlFor="">Imagen:</label>
+                <label htmlFor="">Tiempo de vida max: </label>
+                    <input 
+                    type="text"
+                    value={input.timeLifeMax}
+                    name='timeLifeMax'
+                    onChange={e => handleChange(e)}
+                    />
+                </div>
+
+
+                <div>
+                <label htmlFor="">Imagen: </label>
                     <input 
                     type="text"
                     value={input.image}
@@ -119,7 +156,7 @@ export default function DogForm() {
 
                 <select onChange={e => handleSelect(e)}>
                     {temperament.map((temp) => (
-                        <option value={temp.name}>{temp.name}</option>
+                        <option value={temp.name} key={temp.id}>{temp.name}</option>
     ))}
                 </select>
                 

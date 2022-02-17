@@ -15,8 +15,10 @@ const getApiInfo = async () => {
         return {
             id: el.id,
             name: el.name,
-            height: el.height,
-            weight: el.weight,
+            heightMin: el.height.metric.split(' - ')[0],
+            heightMax: el.height.metric.split(' - ')[1],
+            weightMin: el.weight.metric.split(' - ')[0],
+            weightMax: el.weight.metric.split(' - ')[1],
             timLife: el.ife_span,
             image: el.image,
             temperament: el.temperament
@@ -102,9 +104,12 @@ router.get('/temperament', async (req, res) => {
 router.post('/dog', async (req, res) => {
     let {
         name,
-        height,
-        weight,
-        timeLife,
+        heightMin,
+        heightMax,
+        weightMin,
+        weightMax,
+        timeLifeMin,
+        timeLifeMax,
         createdInDb,
         image,
         temperament,
@@ -112,9 +117,12 @@ router.post('/dog', async (req, res) => {
 
     let dogCreated = await Dog.create({
         name,
-        height,
-        weight,
-        timeLife,
+        heightMin,
+        heightMax,
+        weightMin,
+        weightMax,
+        timeLifeMin,
+        timeLifeMax,
         image,
         createdInDb
     })

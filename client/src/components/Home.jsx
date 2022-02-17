@@ -32,7 +32,9 @@ export default function Home () {
     }
 
     function handleSelectFiltered(e) {
+        e.preventDefault()
         dispatch(selectFiltered(e.target.value))
+        setCurrentPage(1)
     }
 
     function handleFilterCreated(e) {
@@ -86,15 +88,16 @@ export default function Home () {
 
 <div className={styles.contentSelect}>
 <select onChange={e => handleWeight(e)}>
-    <option value='asc'>Ascen</option>
-    <option value='desc'>Desc</option>
+    <option value='asc'>Perro pequeño</option>
+    <option value='desc'>Perro grande</option>
 </select>
 </div>
 
 <div className={styles.contentSelect}>
 <select onChange={e => handleSelectFiltered(e)}>
 {temperament.map((temp) => (
-            <option value={temp.name}>{temp.name}</option>
+            
+            <option value={temp.name} key={temp.id}>{temp.name}</option>
 ))}
 </select>
 </div>
@@ -121,7 +124,14 @@ export default function Home () {
                         return (
                             <div>
                                 <Link to={"/home/" + c.id}>
-                                    <Card name={c.name} image={c.image} height={c.height} weight={c.weight} temperament={c.temperament} key={c.id} />
+                                    <Card name={c.name} 
+                                    image={c.image} 
+                                    heightMin={ c.heightMin} 
+                                    heightMax={c.heightMax} 
+                                    weightMin={c.weightMin}
+                                    weightMax={c.weightMax} 
+                                    temperament={c.temperament} 
+                                    key={c.id} />
                                 </Link>
                             </div>
                         )
