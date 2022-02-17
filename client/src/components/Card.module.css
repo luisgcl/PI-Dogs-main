@@ -1,20 +1,21 @@
 .container {
     display: flex;
-    flex-flow: row wrap;
+    /* flex-flow: row wrap; */
     justify-content: space-around;
-    background: red;
+    background: rgb(238, 232, 232);
     
     width: 250px;
     /* justify-content: center; */
     margin: auto;
-   justify-items: center;
+    margin-bottom: 10px;
+  /* flex-direction: row; */
     
     text-decoration: none;
   
 }
 
-div .card {
-    /* width: 330px;
+.card {
+     /* width: 330px;
     height: 430px;
     border-radius: 8px;
     box-shadow: 0 2px 2px rbg(0, 0, 0, 0.2);
@@ -22,18 +23,26 @@ div .card {
     margin: 20px;
     text-align: center;
     transition: all 0.25s;
-    border: 1px bold; */
-    display: flex;
+    border: 1px bold; 
+     display: flex;
     flex-flow: row wrap;
-    width: 200px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
-    text-decoration: none;
-    text-decoration-style: none;
+    width: 200px; */
+   
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+        text-decoration: none;
+        text-decoration-style: none;
+        margin: 4px 2px; 
     
-}
+} 
 
 .card:hover {
     margin-bottom: 10px;
-}
+} 
+
+
+ 
+
+
+
+

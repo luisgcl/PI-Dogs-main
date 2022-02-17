@@ -9,6 +9,7 @@ import Paginated from "./Paginated";
 
 //styles
 import styles from './Home.module.css'
+// import style from './Card.module.css'
 
 export default function Home () {
     const dispatch = useDispatch();
@@ -88,8 +89,8 @@ export default function Home () {
 
 <div className={styles.contentSelect}>
 <select onChange={e => handleWeight(e)}>
-    <option value='asc'>Perro pequeño</option>
-    <option value='desc'>Perro grande</option>
+    <option value='asc'>Perro grande</option>
+    <option value='desc'>Perro chico</option>
 </select>
 </div>
 
@@ -122,7 +123,7 @@ export default function Home () {
                 {
                     currentDogs?.map((c) => {
                         return (
-                            <div>
+                            <div className={styles.cards}>
                                 <Link to={"/home/" + c.id}>
                                     <Card name={c.name} 
                                     image={c.image} 

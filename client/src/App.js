@@ -13,7 +13,7 @@ function App() {
         <Route path= '/' element={<LandingPage />}></Route>
         <Route path= '/home' element={<Home />}></Route>
         <Route path= '/dog' element={<DogForm />}></Route>
-        {/* <Route path={`/home/ ${id}`} element={<Detail />}></Route> */}
+        {/* <Route path={`/dog/ ${id}`} element={<Detail />}></Route> */}
       </Routes>
     </div>
     </BrowserRouter>

@@ -83,11 +83,14 @@ function rootReducer (state = inicialState, action) {
                         case 'ORDER_BY_WEIGHT':   
                         let sortedWeight = action.payload === 'asc' ? state.dogs.sort((a,b) => { 
                               
-                              return (parseInt(b.weightMin) - parseInt(a.weightMin) ) 
-                             
+                      if(parseInt(a.weightMin) < parseInt(b.weightMin)) return 1
+                      if(parseInt(a.weightMin) > parseInt(b.weightMin)) return -1
+                        return 0
                           }) :
                           state.dogs.sort((a, b) => {
-                            return (parseInt(b.weightMax) - parseInt(a.weightMax) )
+                            if(parseInt(b.weightMin) < parseInt(a.weightMin)) return 1
+                            if(parseInt(b.weightMin) > parseInt(a.weightMin)) return -1
+                            return 0
                           })
                             return{
                                 ...state,
