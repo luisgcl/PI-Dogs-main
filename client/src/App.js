@@ -9,11 +9,12 @@ function App() {
   return (
     <BrowserRouter>
     <div className="App">
+   
       <Routes>
         <Route path= '/' element={<LandingPage />}></Route>
         <Route path= '/home' element={<Home />}></Route>
         <Route path= '/dog' element={<DogForm />}></Route>
-        {/* <Route path={`/dog/ ${id}`} element={<Detail />}></Route> */}
+        <Route path={`/detail/:id`} element={<Detail />}></Route>
       </Routes>
     </div>
     </BrowserRouter>

@@ -1,6 +1,7 @@
 const inicialState = {
     dogs: [],
     allDogs: [],
+    dogsById:[],
     temperament: []
 }
 
@@ -25,6 +26,12 @@ function rootReducer (state = inicialState, action) {
                     ...state,
                     dogs: createdFilter 
                 }
+                case 'GET_ID_DOGS':
+                    return {
+                        ...state,
+                        dogsById: action.payload
+                        
+                    }
 
                 case 'SELECT_FILTERED':
                     // const filterDogs = state.allDogs
@@ -80,18 +87,19 @@ function rootReducer (state = inicialState, action) {
                               ...state,
                               dogs: sortedArr
                           }
-                        case 'ORDER_BY_WEIGHT':   
-                        let sortedWeight = action.payload === 'asc' ? state.dogs.sort((a,b) => { 
-                              
-                      if(parseInt(a.weightMin) < parseInt(b.weightMin)) return 1
-                      if(parseInt(a.weightMin) > parseInt(b.weightMin)) return -1
-                        return 0
-                          }) :
-                          state.dogs.sort((a, b) => {
-                            if(parseInt(b.weightMin) < parseInt(a.weightMin)) return 1
-                            if(parseInt(b.weightMin) > parseInt(a.weightMin)) return -1
-                            return 0
-                          })
+                        case 'ORDER_BY_WEIGHT': 
+                        let sortedWeight =[]
+                    
+                        sortedWeight =  state.dogs.sort(function(a,b) { 
+                              let aInt = parseInt(a.weightMin) || 0
+                              let bInt = parseInt(b.weightMin) || 0
+                              return action.payload === 'asc' ? aInt - bInt : bInt - aInt
+                            
+                
+                              })
+                       
+                        
+                         
                             return{
                                 ...state,
                                 dogs: sortedWeight

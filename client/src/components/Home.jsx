@@ -89,8 +89,8 @@ export default function Home () {
 
 <div className={styles.contentSelect}>
 <select onChange={e => handleWeight(e)}>
-    <option value='asc'>Perro grande</option>
-    <option value='desc'>Perro chico</option>
+    <option value='asc'>Perro chico</option>
+    <option value='desc'>Perro grande</option>
 </select>
 </div>
 
@@ -119,12 +119,12 @@ export default function Home () {
                 allDogs={allDogs.length}
                 paginated={paginated}
                 />
-
-                {
+            <ul className={styles.cards}>
+            {
                     currentDogs?.map((c) => {
                         return (
                             <div className={styles.cards}>
-                                <Link to={"/home/" + c.id}>
+                                <Link to={"/detail/" + c.id}>
                                     <Card name={c.name} 
                                     image={c.image} 
                                     heightMin={ c.heightMin} 
@@ -138,6 +138,8 @@ export default function Home () {
                         )
                     })
                 }
+            </ul>
+                
             </div>
         </div>
     )
